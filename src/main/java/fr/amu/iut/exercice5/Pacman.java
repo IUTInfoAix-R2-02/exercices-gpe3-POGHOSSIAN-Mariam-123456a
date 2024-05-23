@@ -5,8 +5,7 @@ import javafx.scene.shape.Line;
 
 public class Pacman extends Personnage {
 
-    private Line bouche;
-
+    private final Line bouche;
 
     public Pacman() {
         super("droite", Color.BLACK, Color.YELLOW);
@@ -28,15 +27,14 @@ public class Pacman extends Personnage {
     public void deplacerADroite(double largeurJeu) {
         super.deplacerADroite(largeurJeu);
         //sens de la bouche
-        bouche.setEndX(bouche.getStartX() + LARGEUR_MOITIE_PERSONNAGE - .5);
+        bouche.setEndX(bouche.getStartX() + LARGEUR_MOITIE_PERSONNAGE - .5 );
         bouche.setEndY(bouche.getStartY());
     }
 
     @Override
     public void deplacerEnBas(double hauteurJeu) {
-        // à compléter
         super.deplacerEnBas(hauteurJeu);
-        bouche.setEndX(bouche.getStartX() );
+        bouche.setEndX(bouche.getStartX());
         bouche.setEndY(bouche.getStartY() + LARGEUR_MOITIE_PERSONNAGE - .5);
     }
 
@@ -44,8 +42,7 @@ public class Pacman extends Personnage {
     public void deplacerEnHaut() {
         super.deplacerEnHaut();
         bouche.setEndX(bouche.getStartX());
-        bouche.setEndY(bouche.getStartY()- LARGEUR_MOITIE_PERSONNAGE + .5);
-        // à compléter
+        bouche.setEndY(bouche.getStartY() - LARGEUR_MOITIE_PERSONNAGE + .5);
     }
 
 }

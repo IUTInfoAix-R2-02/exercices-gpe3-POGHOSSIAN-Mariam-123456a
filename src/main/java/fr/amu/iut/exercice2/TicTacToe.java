@@ -12,9 +12,6 @@ import javafx.stage.Stage;
 import java.util.Random;
 
 public class TicTacToe extends Application {
-
-
-
     private GridPane root;
     @Override
     public void start(Stage primaryStage) {
@@ -27,7 +24,7 @@ public class TicTacToe extends Application {
                 Label l = new Label();
                 l.setBorder(new Border(new BorderStroke(Color.LIGHTGREY,
                         BorderStrokeStyle.SOLID,
-                        CornerRadii.EMPTY,new BorderWidths(2))));
+                        CornerRadii.EMPTY,new BorderWidths(1))));
 
 
                 switch (rand.nextInt(3)) {
@@ -47,5 +44,6 @@ public class TicTacToe extends Application {
         primaryStage.show();
     }
 }
+
 
 
