@@ -109,7 +109,7 @@ class Personnage extends Group {
     }
 
     public boolean estEnCollisionAvecLesObstaclesDuJeu() {
-        for (Obstacle unObstacle : JeuMain.getLesObstacles()) {
+        for (tp1.exercice5.Obstacle unObstacle : JeuMain.getLesObstacles()) {
             if (getBoundsInParent().contains(unObstacle.getBoundsInParent())
                     || unObstacle.getBoundsInParent().contains(getBoundsInParent())) {
                 return true;

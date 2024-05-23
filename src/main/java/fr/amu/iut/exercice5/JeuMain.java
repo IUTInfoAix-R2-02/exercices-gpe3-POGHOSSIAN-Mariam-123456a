@@ -1,17 +1,24 @@
 package fr.amu.iut.exercice5;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.util.ArrayList;
+import java.util.Optional;
 
 public class JeuMain extends Application {
 
     private Scene scene;
-    private static final ArrayList<Obstacle> lesObstacles = new ArrayList<>();
+    private static final ArrayList<tp1.exercice5.Obstacle> lesObstacles = new ArrayList<>();
 
     @Override
     public void start(Stage primaryStage) {
@@ -39,7 +46,7 @@ public class JeuMain extends Application {
 
         //ajout d'un obstacle au milieu
 
-        Obstacle obstacleCentral = new Obstacle(60, 300, Paint.valueOf("blue"));
+        tp1.exercice5.Obstacle obstacleCentral = new tp1.exercice5.Obstacle(60, 300, Paint.valueOf("blue"));
         obstacleCentral.setStyle("-fx-fill: brown;");
         obstacleCentral.setLayoutX(300);
         obstacleCentral.setLayoutY(80);
@@ -82,7 +89,7 @@ public class JeuMain extends Application {
         });
     }
 
-    public static ArrayList<Obstacle> getLesObstacles(){
+    public static ArrayList<tp1.exercice5.Obstacle> getLesObstacles(){
         return lesObstacles;
     }
 
