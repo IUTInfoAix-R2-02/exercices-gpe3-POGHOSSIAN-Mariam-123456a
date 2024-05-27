@@ -1,23 +1,36 @@
-package fr.amu.iut.exercice3;
+package fr.amu.iut.exercice13;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 @SuppressWarnings("Duplicates")
-public class MainPersonnes  {
+public class MainPersonnes {
 
     private static ObservableList<Personne> lesPersonnes;
-
     private static ListChangeListener<Personne> unChangementListener;
 
     public static void main(String[] args) {
-
         lesPersonnes = FXCollections.observableArrayList();
 
-//        unChangementListener = à completer
+        unChangementListener = change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    for (Personne p : change.getAddedSubList()) {
+                        System.out.println(p.getNom() + " a été ajouté.");
+                    }
+                }
+                if (change.wasRemoved()) {
+                    for (Personne p : change.getRemoved()) {
+                        System.out.println(p.getNom() + " a été supprimé.");
+                    }
+                }
+            }
+        };
 
         lesPersonnes.addListener(unChangementListener);
+
+        question2(); // Change this to call question2() instead of question1()
     }
 
     public static void question1() {
@@ -36,7 +49,7 @@ public class MainPersonnes  {
         lesPersonnes.add(pierre);
         lesPersonnes.add(paul);
         lesPersonnes.add(jacques);
-        lesPersonnes.remove(paul);
+        lesPersonnes.remove(paul); // This will trigger the listener for removal
     }
 
     public static void question3() {
@@ -55,8 +68,7 @@ public class MainPersonnes  {
         Personne jacques = new Personne("Jacques", 60);
         lesPersonnes.addAll(pierre, paul, jacques);
         for (Personne p : lesPersonnes)
-            p.setAge(p.getAge()+10);
+            p.setAge(p.getAge() + 10);
         lesPersonnes.removeAll(paul, pierre);
     }
 }
-
