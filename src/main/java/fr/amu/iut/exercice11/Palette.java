@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
+//exo 1
 @SuppressWarnings("Duplicates")
 public class Palette extends Application {
 
