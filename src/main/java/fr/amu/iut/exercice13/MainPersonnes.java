@@ -1,37 +1,57 @@
 package fr.amu.iut.exercice13;
 
+
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
-@SuppressWarnings("Duplicates")
-public class MainPersonnes {
+
+public class MainPersonnes  {
+
 
     private static ObservableList<Personne> lesPersonnes;
+
+
     private static ListChangeListener<Personne> unChangementListener;
+    private static ListChangeListener<Personne> plusieursChangementsListener;
+
 
     public static void main(String[] args) {
-        lesPersonnes = FXCollections.observableArrayList();
 
-        unChangementListener = change -> {
+
+        lesPersonnes = FXCollections.observableArrayList(personne -> new javafx.beans.Observable[] {personne.ageProperty()});
+
+
+        plusieursChangementsListener = change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
                     for (Personne p : change.getAddedSubList()) {
-                        System.out.println(p.getNom() + " a été ajouté.");
+                        System.out.println("Personne ajoutée : " + p.getNom());
                     }
                 }
                 if (change.wasRemoved()) {
                     for (Personne p : change.getRemoved()) {
-                        System.out.println(p.getNom() + " a été supprimé.");
+                        System.out.println("Personne supprimée : " + p.getNom());
+                    }
+                }
+                if (change.wasUpdated()) {
+                    for (int i = change.getFrom(); i < change.getTo(); i++) {
+                        Personne p = lesPersonnes.get(i);
+                        System.out.println(p.getNom() + " a maintenant " + p.getAge() + " ans");
                     }
                 }
             }
+            System.out.println("Série de changements terminée.");
         };
 
-        lesPersonnes.addListener(unChangementListener);
 
-        question2(); // Change this to call question2() instead of question1()
+        lesPersonnes.addListener(plusieursChangementsListener);
+
+
+        // Pour tester, invoquer question5
+        question5();
     }
+
 
     public static void question1() {
         Personne pierre = new Personne("Pierre", 20);
@@ -42,6 +62,7 @@ public class MainPersonnes {
         lesPersonnes.add(jacques);
     }
 
+
     public static void question2() {
         Personne pierre = new Personne("Pierre", 20);
         Personne paul = new Personne("Paul", 40);
@@ -49,8 +70,9 @@ public class MainPersonnes {
         lesPersonnes.add(pierre);
         lesPersonnes.add(paul);
         lesPersonnes.add(jacques);
-        lesPersonnes.remove(paul); // This will trigger the listener for removal
+        lesPersonnes.remove(paul);
     }
+
 
     public static void question3() {
         Personne pierre = new Personne("Pierre", 20);
@@ -59,16 +81,21 @@ public class MainPersonnes {
         lesPersonnes.add(pierre);
         lesPersonnes.add(paul);
         lesPersonnes.add(jacques);
-        paul.setAge(5);
+        paul.setAge(45);
     }
+
 
     public static void question5() {
         Personne pierre = new Personne("Pierre", 20);
         Personne paul = new Personne("Paul", 40);
         Personne jacques = new Personne("Jacques", 60);
         lesPersonnes.addAll(pierre, paul, jacques);
-        for (Personne p : lesPersonnes)
+        for (Personne p : lesPersonnes) {
             p.setAge(p.getAge() + 10);
+        }
         lesPersonnes.removeAll(paul, pierre);
     }
 }
+
+
+
